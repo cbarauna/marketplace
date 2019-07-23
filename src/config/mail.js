@@ -1,9 +1,9 @@
 module.exports = {
-  host: '',
-  port: '',
+  host: process.env.MAIL_HOST,
+  port: process.env.MAIL_PORT,
   secure: false,
   auth: {
-    user: '',
-    password: ''
+    user: process.env.MAIL_USER,
+    password: process.env.MAIL_PASS
   }
 }

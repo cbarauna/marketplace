@@ -1,6 +1,7 @@
 const Ad = require('../models/Ad')
 const User = require('../models/User')
-const Mail = require('../services/mail')
+const PurchaseMail = require('../jobs/PurchaseMail')
+const Queue = require('../services/Queue')
 
 class PurchaseController {
   async store (req, res) {
@@ -9,12 +10,9 @@ class PurchaseController {
 
     const user = await User.findById(req.userId)
 
-    await Mail.sendMail({
-      from: '"Carlos Baraúna"<carloss.barauna@gmail.com>',
-      to: purchaseAd.author.email,
-      subject: `Solicitação de Compra: ${purchaseAd.title}`,
-      html: '<p>teste</p>'
-    })
+Queue.create(PurchaseMail.key, {
+  ad: purchaseAd, user, content
+}).save()
     return res.send()
   }
 }
