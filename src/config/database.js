@@ -1,4 +1,4 @@
 module.exports = {
-  uri:
-  process.env.DB_URL
+  uri:'mongodb+srv://root:root@cluster0-fze0y.mongodb.net/test?retryWrites=true&w=majority'
+ // process.env.DB_URL
 }
